@@ -17,10 +17,13 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cookieParser());
+// Configuración de CORS permitiendo cualquier origen
 app.use(cors({
-    origin: '*', // Cambia esta URL por la de tu frontend
-    credentials: true // Permitir cookies y encabezados de autorización
+    origin: '*', // Permitir cualquier origen
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // Métodos permitidos
+    allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
 }));
+
 
 
 // Rutas
