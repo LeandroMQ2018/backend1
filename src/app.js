@@ -18,25 +18,13 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(cookieParser());
 
-// Configuración de CORS
-const allowedOrigins = [
-  'https://frontend1-k9uj91tab-leandromq2018s-projects.vercel.app', // URL exacta del frontend en producción
-];
-
-
-app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true); // Permite la solicitud si el origen está en la lista
-    } else {
-      callback(new Error('Origen no permitido por CORS'));
-    }
-  },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-}));
-
+// Configuración de CORS global
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*'); // Permitir cualquier origen
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS'); // Métodos permitidos
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization'); // Encabezados permitidos
+    next();
+});
 
 // Rutas
 app.use('/api/usuarios', usuarioRutas);
@@ -44,4 +32,3 @@ app.use('/api/tareas', tareaRutas);
 app.use('/api/notas', notaRutas);
 
 export default app;
-
