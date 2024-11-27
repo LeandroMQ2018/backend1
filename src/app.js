@@ -19,10 +19,12 @@ app.use(express.json());
 app.use(cookieParser());
 // Configuración de CORS permitiendo cualquier origen
 app.use(cors({
-    origin: '*', // Permitir cualquier origen
+    origin: '*', // Cambia al dominio de tu frontend
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // Métodos permitidos
     allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
+    credentials: true, // Habilita el uso de credenciales como cookies o tokens
 }));
+
 
 
 
