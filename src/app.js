@@ -13,7 +13,7 @@ dotenv.config();
 
 const app = express();
 const allowedOrigins = [
-  'https://frontend1-alf8jfzql-leandromq2018s-projects.vercel.app', // Dominio actual de Vercel
+  'https://frontend1-l0u4x1if2-leandromq2018s-projects.vercel.app', // Dominio actual de Vercel
 ];
 // Middlewares
 app.use(morgan('dev'));
