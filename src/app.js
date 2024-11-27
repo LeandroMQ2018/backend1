@@ -15,7 +15,7 @@ const app = express();
 
 // Configuración de CORS: permitir encabezados específicos y métodos
 app.use(cors({
-  origin: 'https://frontend1-25dt9fa3g-leandromq2018s-projects.vercel.app', // Solo permitir solicitudes de tu frontend
+  origin: '*', // Solo permitir solicitudes de tu frontend
   credentials: true, // Habilitar cookies o credenciales
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // Métodos permitidos
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'], // Encabezados permitidos, incluyendo Content-Type
