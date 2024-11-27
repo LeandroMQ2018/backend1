@@ -19,11 +19,12 @@ app.use(express.json());
 app.use(cookieParser());
 // Configuración de CORS permitiendo cualquier origen
 app.use(cors({
-    origin: '*', // Cambia al dominio de tu frontend
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // Métodos permitidos
-    allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
-    credentials: true, // Habilita el uso de credenciales como cookies o tokens
+    origin: 'https://frontend1-3v16b6mvd-leandromq2018s-projects.vercel.app', // Cambia esto a tu URL de Vercel
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true, // Esto es necesario si usas autenticación basada en cookies
 }));
+
 
 
 
