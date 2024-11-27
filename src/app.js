@@ -2,46 +2,39 @@ import express from 'express';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import dotenv from 'dotenv'; // Cargar dotenv
+import dotenv from 'dotenv';
 
-import usuarioRutas from './routes/usuario.routes.js'; // Rutas de usuarios
-import tareaRutas from './routes/tarea.routes.js'; // Rutas de tareas
-import notaRutas from './routes/nota.routes.js'; // Rutas de notas
+import usuarioRutas from './routes/usuario.routes.js';
+import tareaRutas from './routes/tarea.routes.js';
+import notaRutas from './routes/nota.routes.js';
 
 // Configurar dotenv
 dotenv.config();
 
 const app = express();
-const allowedOrigins = [
-  'https://frontend1-jbkhxxvjm-leandromq2018s-projects.vercel.app', // Dominio actual de Vercel
-];
+
 // Middlewares
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cookieParser());
-// Configuración de CORS permitiendo cualquier origen
-
 
 // Configuración de CORS
+const allowedOrigins = [
+  'https://frontend1-jbkhxxvjm-leandromq2018s-projects.vercel.app', // Reemplaza con la URL de tu frontend en Vercel
+   // Para pruebas locales
+];
+
 app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true); // Permitir el acceso
-    } else {
-      callback(new Error('No permitido por CORS'));
-    }
-  },
-  credentials: true, // Habilitar cookies y credenciales
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // Métodos permitidos
-  allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
+  origin: allowedOrigins, // Especifica los orígenes permitidos
+  credentials: true, // Permitir cookies en solicitudes cross-origin
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-
-
-
 // Rutas
-app.use('/api/usuarios', usuarioRutas); // Para rutas de usuarios
-app.use('/api/tareas', tareaRutas); // Para rutas de tareas
-app.use('/api/notas', notaRutas); // Para rutas de notas
+app.use('/api/usuarios', usuarioRutas);
+app.use('/api/tareas', tareaRutas);
+app.use('/api/notas', notaRutas);
 
 export default app;
+
