@@ -20,16 +20,23 @@ app.use(cookieParser());
 
 // Configuración de CORS
 const allowedOrigins = [
-  'https://frontend1-k9uj91tab-leandromq2018s-projects.vercel.app', // Reemplaza con la URL de tu frontend en Vercel
-   // Para pruebas locales
+  'https://frontend1-k9uj91tab-leandromq2018s-projects.vercel.app', // URL exacta del frontend en producción
 ];
 
+
 app.use(cors({
-  origin: allowedOrigins, // Especifica los orígenes permitidos
-  credentials: true, // Permitir cookies en solicitudes cross-origin
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true); // Permite la solicitud si el origen está en la lista
+    } else {
+      callback(new Error('Origen no permitido por CORS'));
+    }
+  },
+  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
 
 // Rutas
 app.use('/api/usuarios', usuarioRutas);
