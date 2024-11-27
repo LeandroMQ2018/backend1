@@ -18,8 +18,8 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: '*', // Permitir cualquier origen
-    credentials: true, // Permitir cookies si es necesario
+    origin: 'https://frontend1-q0p8lj7y4-leandromq2018s-projects.vercel.app', // Cambia esta URL por la de tu frontend
+    credentials: true // Permitir cookies y encabezados de autorización
 }));
 
 
