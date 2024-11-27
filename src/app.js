@@ -18,14 +18,14 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(cookieParser());
 
-// Configuración de CORS global
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*'); // Permitir cualquier origen
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS'); // Métodos permitidos
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization'); // Encabezados permitidos
-    next();
-});
-
+// Configuración de CORS para permitir todo
+app.use(cors({
+  origin: true, // Permitir cualquier origen
+  credentials: true, // Permitir cookies o credenciales
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // Métodos permitidos
+  allowedHeaders: '*', // Permitir cualquier encabezado
+}));
+ 
 // Rutas
 app.use('/api/usuarios', usuarioRutas);
 app.use('/api/tareas', tareaRutas);
