@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: backend-roles
+    env: node
+    buildCommand: "npm install"
+    startCommand: "npm run dev"
+    envVars:
+      - key: JWT_SECRETO
+        value: "mi_secreto_super_seguro"
+      - key: MONGO_URI
+        value: "mongodb+srv://LeandroDeploy:iFzmq1tJP6FpVcop@leandro.cpymy.mongodb.net/"
