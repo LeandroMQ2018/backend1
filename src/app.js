@@ -20,7 +20,7 @@ app.use(cookieParser());
 
 // Configuración de CORS
 const allowedOrigins = [
-  'https://frontend1-jbkhxxvjm-leandromq2018s-projects.vercel.app', // Reemplaza con la URL de tu frontend en Vercel
+  'https://frontend1-k9uj91tab-leandromq2018s-projects.vercel.app', // Reemplaza con la URL de tu frontend en Vercel
    // Para pruebas locales
 ];
 
