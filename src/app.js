@@ -23,9 +23,9 @@ app.use(cors({
   origin: true, // Permitir cualquier origen
   credentials: true, // Permitir cookies o credenciales
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // Métodos permitidos
-  allowedHeaders: '*', // Permitir cualquier encabezado
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin', 'X-Auth-Token'], // Especificar encabezados permitidos
 }));
- 
+
 // Rutas
 app.use('/api/usuarios', usuarioRutas);
 app.use('/api/tareas', tareaRutas);
