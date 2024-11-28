@@ -28,6 +28,8 @@ export const registrarUsuario = async (req, res) => {
     res.status(500).json({ mensaje: 'Error en el servidor.', error: error.message });
   }
 };
+
+// Obtener estudiantes
 export const obtenerEstudiantes = async (req, res) => {
   try {
     const estudiantes = await Usuario.find({ rol: 'estudiante' }).select('nombre');
@@ -42,18 +44,12 @@ export const iniciarSesion = async (req, res) => {
   try {
     const { correo, contraseña } = req.body;
 
-    console.log('Datos recibidos:', { correo, contraseña });
-
     const usuario = await Usuario.findOne({ correo });
     if (!usuario) {
       return res.status(404).json({ mensaje: 'Usuario no encontrado.' });
     }
 
-    console.log('Usuario encontrado:', usuario);
-
     const contraseñaValida = await bcrypt.compare(contraseña, usuario.contraseña);
-    console.log('Resultado de comparación de contraseña:', contraseñaValida);
-
     if (!contraseñaValida) {
       return res.status(401).json({ mensaje: 'Contraseña incorrecta.' });
     }
@@ -64,7 +60,8 @@ export const iniciarSesion = async (req, res) => {
       { expiresIn: '1h' }
     );
 
-    res.cookie('token', token, { httpOnly: true }).json({
+    // Enviar el token JWT en la respuesta
+    res.json({
       mensaje: 'Inicio de sesión exitoso.',
       token,
       usuario: { id: usuario._id, nombre: usuario.nombre, rol: usuario.rol },
@@ -73,7 +70,8 @@ export const iniciarSesion = async (req, res) => {
     res.status(500).json({ mensaje: 'Error en el servidor.', error: error.message });
   }
 };
-export const cerrarSesion = (req, res) => {
-  res.clearCookie('token').json({ mensaje: 'Sesión cerrada exitosamente.' });
-};
 
+// Cerrar sesión
+export const cerrarSesion = (req, res) => {
+  res.json({ mensaje: 'Sesión cerrada exitosamente.' });
+};
