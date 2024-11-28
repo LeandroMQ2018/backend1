@@ -1,8 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 export const autenticarUsuario = (req, res, next) => {
-  // Obtener el token desde las cookies
-  const token = req.cookies.token;
+  const token = req.cookies.token; // Asegúrate de que el token se está tomando desde las cookies
   console.log('Token recibido desde cookies:', token);
 
   if (!token) {
@@ -20,6 +19,7 @@ export const autenticarUsuario = (req, res, next) => {
     res.status(403).json({ mensaje: 'Token inválido o expirado.' });
   }
 };
+
 
 export const autorizarRoles = (...rolesPermitidos) => {
   return (req, res, next) => {
