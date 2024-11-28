@@ -13,11 +13,10 @@ export const autenticarUsuario = (req, res, next) => {
     req.usuario = usuario; // Adjuntar usuario verificado a la solicitud
     next();
   } catch (error) {
+    console.error('Error al verificar el token:', error);
     res.status(403).json({ mensaje: 'Token inválido o expirado.' });
   }
 };
-
-
 
 export const autorizarRoles = (...rolesPermitidos) => {
   return (req, res, next) => {
@@ -31,3 +30,4 @@ export const autorizarRoles = (...rolesPermitidos) => {
     next();
   };
 };
+
