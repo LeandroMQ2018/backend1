@@ -16,7 +16,7 @@ const app = express();
 // Función para permitir el origen dinámicamente
 const corsOptions = {
   origin: (origin, callback) => {
-    // Permite cualquier origen o puedes agregar más restricciones
+    // Asegúrate de que la URL de tu frontend en Vercel está incluida correctamente
     if (!origin || origin === 'https://frontend1-5w1jiwndf-leandromq2018s-projects.vercel.app') {
       callback(null, true); // Permitir el origen si es válido
     } else {
@@ -24,9 +24,9 @@ const corsOptions = {
     }
   },
   credentials: true, // Habilitar cookies o credenciales
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // Métodos permitidos
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'], // Encabezados permitidos
-  preflightContinue: false, // No continuar después de la respuesta de preflight
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
+  preflightContinue: false,
 };
 
 // Configurar CORS
