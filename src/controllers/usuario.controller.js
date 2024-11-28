@@ -40,6 +40,7 @@ export const obtenerEstudiantes = async (req, res) => {
 };
 
 // Iniciar Sesión
+// Iniciar Sesión
 export const iniciarSesion = async (req, res) => {
   try {
     const { correo, contraseña } = req.body;
@@ -60,16 +61,16 @@ export const iniciarSesion = async (req, res) => {
       { expiresIn: '1h' }
     );
 
-    // Enviar el token JWT en la respuesta
     res.json({
       mensaje: 'Inicio de sesión exitoso.',
-      token,
+      token, // Enviar el token en la respuesta
       usuario: { id: usuario._id, nombre: usuario.nombre, rol: usuario.rol },
     });
   } catch (error) {
     res.status(500).json({ mensaje: 'Error en el servidor.', error: error.message });
   }
 };
+
 
 // Cerrar sesión
 export const cerrarSesion = (req, res) => {
