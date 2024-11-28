@@ -1,16 +1,15 @@
 import jwt from 'jsonwebtoken';
 
 export const autenticarUsuario = (req, res, next) => {
-  // Obtener el token desde el encabezado Authorization
-  const token = req.headers['authorization']?.split(' ')[1]; // Formato: "Bearer <token>"
+  const token = req.headers['authorization']?.split(' ')[1];
 
   if (!token) {
     return res.status(401).json({ mensaje: 'Acceso denegado. No está autenticado.' });
   }
 
   try {
-    const usuario = jwt.verify(token, process.env.JWT_SECRETO); // Verificar el token
-    req.usuario = usuario; // Adjuntar usuario verificado a la solicitud
+    const usuario = jwt.verify(token, process.env.JWT_SECRETO);
+    req.usuario = usuario; // El usuario debe tener el campo 'rol' en el JWT
     next();
   } catch (error) {
     console.error('Error al verificar el token:', error);
@@ -20,14 +19,11 @@ export const autenticarUsuario = (req, res, next) => {
 
 export const autorizarRoles = (...rolesPermitidos) => {
   return (req, res, next) => {
-    console.log('Verificando rol del usuario:', req.usuario?.rol);
-    
     if (!rolesPermitidos.includes(req.usuario?.rol)) {
-      console.log(`Rol "${req.usuario?.rol}" no autorizado para esta acción.`);
       return res.status(403).json({ mensaje: 'No tiene permisos para realizar esta acción.' });
     }
-
     next();
   };
 };
+
 
