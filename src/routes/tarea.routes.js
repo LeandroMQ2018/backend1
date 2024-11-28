@@ -22,6 +22,7 @@ router.delete('/:id', autenticarUsuario, autorizarRoles('profesor'), eliminarTar
 router.get('/estudiante', autenticarUsuario, autorizarRoles('estudiante'), verTareasEstudiante);
 router.patch('/:id/marcar', autenticarUsuario, autorizarRoles('estudiante'), marcarTarea);
 
+
 // Asignar nota a tarea entregada (Profesores)
 router.post('/:id/asignar-nota', autenticarUsuario, autorizarRoles('profesor'), asignarNota);
 
