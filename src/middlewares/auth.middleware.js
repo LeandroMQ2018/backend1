@@ -1,21 +1,17 @@
 import jwt from 'jsonwebtoken';
 
 export const autenticarUsuario = (req, res, next) => {
-  const token = req.cookies.token; // Asegúrate de que el token se está tomando desde las cookies
-  console.log('Token recibido desde cookies:', token);
+  const token = req.headers['authorization']?.split(' ')[1]; // Extraer token del encabezado Authorization
 
   if (!token) {
-    console.log('No se encontró el token en las cookies.');
     return res.status(401).json({ mensaje: 'Acceso denegado. No está autenticado.' });
   }
 
   try {
     const usuario = jwt.verify(token, process.env.JWT_SECRETO); // Verificar el token
-    console.log('Usuario autenticado:', usuario);
     req.usuario = usuario; // Adjuntar usuario verificado a la solicitud
     next();
   } catch (error) {
-    console.error('Error al verificar el token:', error.message);
     res.status(403).json({ mensaje: 'Token inválido o expirado.' });
   }
 };
