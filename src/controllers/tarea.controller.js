@@ -35,12 +35,12 @@ export const verTareas = async (req, res) => {
 // Ver tareas del estudiante
 export const verTareasEstudiante = async (req, res) => {
   try {
-    const tareas = await Tarea.find({ estudiante: req.usuario.id })
-      .populate('profesor', 'nombre')
-      .sort({ createdAt: -1 });
-    res.status(200).json(tareas);
+    // Filtra las tareas por el id del estudiante
+    const tareas = await Tarea.find({ estudianteId: req.usuario.id });
+    res.json(tareas);
   } catch (error) {
-    res.status(500).json({ mensaje: 'Error al obtener las tareas.', error: error.message });
+    console.error('Error al obtener las tareas del estudiante:', error);
+    res.status(500).json({ mensaje: 'Error al obtener las tareas.' });
   }
 };
 
