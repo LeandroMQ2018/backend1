@@ -17,7 +17,7 @@ const app = express();
 const corsOptions = {
   origin: (origin, callback) => {
     // Asegúrate de que la URL de tu frontend en Vercel está incluida correctamente
-    if (!origin || origin === 'https://frontend1-7w77e6ag4-leandromq2018s-projects.vercel.app') {
+    if (!origin || origin === 'https://frontend1-9vgb5n04g-leandromq2018s-projects.vercel.app') {
       callback(null, true); // Permitir el origen si es válido
     } else {
       callback(new Error('CORS no permitido'), false);
