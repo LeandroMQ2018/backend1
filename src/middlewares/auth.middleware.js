@@ -1,7 +1,8 @@
 import jwt from 'jsonwebtoken';
 
 export const autenticarUsuario = (req, res, next) => {
-  const token = req.headers['authorization']?.split(' ')[1]; // Extraer token del encabezado Authorization
+  // Obtener el token desde el encabezado Authorization
+  const token = req.headers['authorization']?.split(' ')[1]; // Formato: "Bearer <token>"
 
   if (!token) {
     return res.status(401).json({ mensaje: 'Acceso denegado. No está autenticado.' });
@@ -15,6 +16,7 @@ export const autenticarUsuario = (req, res, next) => {
     res.status(403).json({ mensaje: 'Token inválido o expirado.' });
   }
 };
+
 
 
 export const autorizarRoles = (...rolesPermitidos) => {
